@@ -37,5 +37,13 @@ If you would like to unit test your overriden handler functions, simply use the 
 ```
 
 Now you can access `f`, `g`, or `h` by simply calling the function via `AlgebraHandler.f`, `AlgebraHandler.g`, or `AlgebraHandler.h`
+```scala
+  scala> AlgebraHandler.f("A")
+  "a"
+  scala> AlgebraHandler.g(1)
+  0
+  scala> AlgebraHandler.h(0.0)("A")
+  (0.0, "A")
+```
 
 `@Unit` allows you to access these overriden funcitons and now you may perform unit tests instead of solely relying on integration tests, improving the validity of you freestyle applications.

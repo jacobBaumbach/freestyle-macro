@@ -9,7 +9,7 @@ import freestyle._
 import org.scalatest._
 
 
-class UnitMacroTest extends FunSuite with Matchers {
+class UnitMacroTest extends FlatSpec with Matchers {
 
   @free trait Algebra{
     def f(a: String): FS[String]
@@ -33,19 +33,19 @@ class UnitMacroTest extends FunSuite with Matchers {
     override def h(c: Double)(d: String): TestEither[(Double, String)] = Left("nope")
   }
 
-  test("@Unit should create expected functions"){
+  "@Unit" should "should create expected functions" in {
     """AlgebraHandler.f("A")""" should compile
     """AlgebraHandler.g(1)""" should compile
     """AlgebraHandler.h(0.0)("A")""" should compile
   }
 
-  test("@Unit's functions should have expected functionality"){
+  it should "produce functions that have expected functionality" in {
     AlgebraHandler.f("A") shouldEqual "a"
     AlgebraHandler.g(1) shouldEqual 0
     AlgebraHandler.h(0.0)("A") shouldEqual (0.0, "A")
   }
 
-  test("@Unit should maintain the monadic context of a handler"){
+  it should "maintain the monadic context of a handler" in {
     AlgebraHandlerE.f("A") shouldEqual Right("a")
     AlgebraHandlerE.g(1) shouldEqual Right(0)
     AlgebraHandlerE.h(0.0)("A") shouldEqual Left("nope")
